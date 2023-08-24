@@ -1,0 +1,163 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* Estilos para o cabeçalho */
+.navbar {
+    background-color: #343a40;
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.navbar-toggler-icon {
+    background-color: white;
+}
+
+/* Estilos para o botão de impressão */
+#printButton {
+    margin-top: 1rem;
+}
+
+/* Estilos para as cartas */
+.card {
+    margin-bottom: 30px;
+    border: none;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    background-color: white;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 5px; /* Reduzindo o espaçamento entre os textos */
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px; /* Reduzindo o espaçamento entre os textos */
+}
+
+/* Estilos para a barra de rolagem */
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+
+/* Estilos para a impressão */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 12pt;
+        background-color: white;
+    }
+    .printable-card {
+        border: 1px solid #ccc;
+        margin: 1rem;
+        padding: 1rem;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+    .printable-title {
+        font-size: 1.5rem;
+    }
+    .printable-text {
+        font-size: 1rem;
+    }
+    #printButton, .navbar {
+        display: none;
+    }
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 20px;
+    }
+}
+
+/* Estilos para o contador de favoritos */
+.favorite-count {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* Estilos para as informações do produto */
+.card-title,
+.card-text {
+    margin-bottom: 5px; /* Reduzindo o espaçamento entre os textos */
+}
+
+.card-text:last-child {
+    margin-bottom: 10px; /* Espaçamento um pouco maior após o último texto */
+}
+
+/* Estilos para o botão de favoritar */
+.card-body .btn {
+    margin-top: 5px; /* Reduzindo o espaçamento acima do botão */
+}
+
+/* Estilos para o rodapé */
+.footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+/* Estilos para o contador de favoritos */
+.favorite-count {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* Estilos para o texto do contador de favoritos */
+.text-start {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+#categoryFilterContainer {
+    margin-bottom: 20px;
+}
+
+.d-none {
+    display: none !important;
+}
+/* ... Outros estilos ... */
