@@ -41,7 +41,7 @@ function renderCatalog(products) {
         const card = document.createElement('div');
         card.classList.add('card', 'h-100');
         card.innerHTML = `
-            <img src="./imagens/${product.image}" class="card-img-top" alt="${product.description}">
+            <img src="imagens/${product.image}" class="card-img-top" alt="${product.description}">
             <div class="card-body">
                 <h5 class="card-title">${product.description}</h5>
                 <p class="card-text">Ref: ${product.ref}</p>
