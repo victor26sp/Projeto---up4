@@ -44,59 +44,72 @@ body {
 
 /* Estilos para as cartas */
 .card {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border: none;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sutil sombra para cartas */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s;
     background-color: white;
     border-radius: 8px;
+    padding: 15px;
+    height: 100%; /* Definindo altura fixa */
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Efeito de levantar a carta ao passar o mouse */
+    transform: translateY(-3px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .card-title {
-    font-size: 1.5rem; /* Tamanho maior para o título da carta */
+    font-size: 1rem; /* Tamanho menor para o título da carta */
     margin-bottom: 10px;
     font-weight: bold;
-    color: #333; /* Cor do texto do título */
+    color: #333;
 }
 
 .card-text {
-    font-size: 1.2rem; /* Tamanho maior para o texto da carta */
+    font-size: 0.9rem; /* Tamanho menor para o texto da carta */
     color: #555;
     margin-bottom: 10px;
+    flex-grow: 1; /* Permite que o texto ocupe o espaço restante na carta */
 }
 
 /* Estilos para a barra de rolagem */
 body::-webkit-scrollbar {
-    width: 12px;
-}
-
-body::-webkit-scrollbar-track {
+    width: 10px; /* Largura da barra de rolagem */
     background-color: #f1f1f1;
 }
 
+body::-webkit-scrollbar-track {
+    background-color: transparent; /* Cor do fundo da trilha da barra de rolagem */
+}
+
 body::-webkit-scrollbar-thumb {
-    background-color: #888;
+    background-color: #888; /* Cor do botão de rolagem */
+    border-radius: 5px; /* Borda arredondada do botão de rolagem */
+}
+
+/* Adiciona um efeito suave ao passar o mouse sobre a barra de rolagem */
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
 }
 
 /* Estilos para o botão de favoritar */
-.card-body .btn {
-    margin-top: 10px; /* Espaçamento um pouco maior acima do botão */
+.card .card-body .btn {
+    margin-top: auto; /* Coloca o botão na parte inferior da card-body */
     background-color: #28a745;
     color: white;
     border: none;
     font-weight: bold;
-    padding: 10px 20px; /* Aumenta o tamanho do botão */
+    padding: 10px 20px; /* Tamanho fixo do botão */
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
+    text-align: center;
 }
 
-.card-body .btn:hover {
+.card .card-body .btn:hover {
     background-color: #218838;
 }
 
@@ -112,25 +125,34 @@ body::-webkit-scrollbar-thumb {
     margin-left: 10px; /* Espaçamento um pouco maior à esquerda do contador */
 }
 
-/* Estilos para as informações do produto */
-.card-title,
-.card-text {
-    margin-bottom: 10px; /* Espaçamento um pouco maior entre os textos */
-}
-
-/* Estilos responsivos */
+/* Estilos responsivos para telas com largura máxima de 768px */
 @media (max-width: 768px) {
     .card {
-        margin-bottom: 20px;
+        margin-bottom: 20px; /* Espaçamento inferior reduzido para cartas em telas menores */
+    }
+
+    #categoryFilterContainer {
+        margin-bottom: 20px; /* Margem inferior adicional para o container de filtro de categoria em telas menores */
+    }
+
+    .d-none {
+        display: none !important; /* Oculta elementos com a classe .d-none em telas menores */
     }
 }
 
-#categoryFilterContainer {
-    margin-bottom: 20px;
-}
+/* Estilos para telas maiores que 768px */
+@media (min-width: 769px) {
+    .card {
+        margin-bottom: 30px; /* Espaçamento inferior padrão para cartas em telas maiores */
+    }
 
-.d-none {
-    display: none !important;
+    #categoryFilterContainer {
+        margin-bottom: 30px; /* Margem inferior padrão para o container de filtro de categoria em telas maiores */
+    }
+
+    .d-none {
+        display: block !important; /* Exibe elementos com a classe .d-none em telas maiores */
+    }
 }
 
 /* Estilos para o rodapé */
@@ -139,6 +161,66 @@ body::-webkit-scrollbar-thumb {
     color: white;
     text-align: center;
     padding: 1rem 0;
+    font-size: 1rem; /* Tamanho da fonte */
+}
+
+/* Estilos para os links no rodapé */
+.footer a {
+    color: #daec0f; /* Cor dos links no rodapé */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer a:hover {
+    color: #bbd308; /* Cor dos links no rodapé ao passar o mouse */
+}
+
+/* Estilo para o ícone do botão de navegação */
+.navbar-toggler-icon {
+    background-color: transparent;
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+    position: relative;
+    transition: transform 0.3s, opacity 0.3s;
+    display: block;
+}
+
+/* Estilo das barras horizontais do ícone */
+.navbar-toggler-icon::before, .navbar-toggler-icon::after {
+    content: "";
+    background-color: #333;
+    width: 60px;
+    height: 10px;
+    border-radius: 2px;
+    position: relative;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Estilo das barras horizontais do ícone */
+.navbar-toggler-icon::before {
+    top: -8px;
+    transform-origin: 0 0;
+}
+
+.navbar-toggler-icon::after {
+    top: 8px;
+    transform-origin: 0 100%;
+}
+
+/* Efeito de animação ao passar o mouse sobre o botão */
+.navbar-toggler-icon:hover {
+    transform: rotate(90deg);
+}
+
+.navbar-toggler-icon:hover::before {
+    transform: translateY(0) rotate(45deg);
+    opacity: 0.7;
+}
+
+.navbar-toggler-icon:hover::after {
+    transform: translateY(0) rotate(-45deg);
+    opacity: 0.7;
 }
 
 /* Estilos para a impressão */
@@ -162,6 +244,7 @@ body::-webkit-scrollbar-thumb {
     .printable-text {
         font-size: 1.2rem;
     }
+
     /* Botão de navegação */
     .navbar-toggler {
         margin-top: 1rem;
@@ -174,5 +257,66 @@ body::-webkit-scrollbar-thumb {
     #navbarNav {
         display: none !important;
     }
+
+    /* Estilos para o contêiner do carrinho */
+#cart {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Estilos para o título do carrinho */
+#cart h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Estilos para a lista de itens do carrinho */
+#cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#cart-items li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilos para o botão de finalizar compra */
+#checkout-button {
+    margin-top: 20px;
+}
+/* Estilos para o botão de carrinho de compras */
+#cart-button {
+    background-color: #28a745; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    border: none;
+    font-weight: bold;
+    font-size: 1.2rem; /* Tamanho da fonte */
+    padding: 15px 30px; /* Espaçamento interno para torná-lo maior */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: center;
+    text-transform: uppercase; /* Transforma o texto em maiúsculas */
+}
+
+#cart-button:hover {
+    background-color: #218838; /* Cor de fundo do botão ao passar o mouse */
+}
+
+/* Estilos para o ícone do carrinho dentro do botão */
+#cart-icon {
+    font-size: 1.5rem; /* Tamanho do ícone */
+    margin-right: 10px; /* Espaçamento à direita do ícone */
+}
+
     /* ... Outros estilos ... */
 }

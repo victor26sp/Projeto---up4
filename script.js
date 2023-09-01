@@ -68,7 +68,13 @@ function importCSV(file) {
             products = [];
 
             for (let i = 1; i < lines.length; i++) {
-                const [ref, description, category, color, composition, image] = lines[i].split(';');
+                const line = lines[i].trim(); // Remove espaços em branco no início e no final
+                if (line.length === 0) {
+                    // Se a linha estiver em branco, pare de ler o arquivo
+                    break;
+                }
+                
+                const [ref, description, category, color, composition, image] = line.split(';');
                 products.push({
                     ref,
                     description,
@@ -222,3 +228,4 @@ document.getElementById('categoryFilterButton').addEventListener('click', functi
     const categoryFilterContainer = document.getElementById('categoryFilterContainer');
     categoryFilterContainer.classList.toggle('d-none');
 });
+
