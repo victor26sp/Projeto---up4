@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Roupas</title>
-    <meta property="og:title" content="Catálogo Oficial">
-    <meta property="og:description" content="Fique por dentro das novidades e lançamentos em primeira mão">
+    <meta property="og:title" content="Catálogo EnfaseOficial">
+    <meta property="og:description" content="Novidades e lançamentos em primeira mão">
     <meta property="og:image" content="https://victor26sp.github.io/Projeto---up4/imagens/88115%20CIDRA.jpg">
     <meta property="og:url" content="https://victor26sp.github.io/Projeto---up4/">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -30,6 +30,8 @@
                 aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            
     
             <!-- Fim do botão de navegação -->
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -48,18 +50,27 @@
         </div>
         <div class="offcanvas-body">
             <ul class="navbar-nav">
+
                 <li class="nav-item">
                     <button id="printButton" class="btn btn-primary btn-sm me-2"><i class="fas fa-print"></i> Imprimir</button>
                 </li>
+                <br>
                 <li class="nav-item">
                     <label class="btn btn-warning btn-sm me-2">
                         <input type="checkbox" id="favoriteFilterInput">
                         <i class="fas fa-star"></i> Favoritos
                     </label>
                 </li>
+                <br>
                 <li class="nav-item">
                     <button id="clearFiltersButton" class="btn btn-secondary btn-sm"><i class="fas fa-eraser"></i> Limpar Filtros</button>
                 </li>
+                <br>
+            <!-- Botão "Enviar Todos via WhatsApp" -->
+                <li class="nav-item">
+                    <button id="sendAllFavoritesButton" type="button" class="btn btn-success">Enviar Favoritos via WhatsApp</button>
+                </li>
+                <br> 
             </ul>
             <!-- Category Filter Container -->
             <div id="categoryFilterContainer">
@@ -81,6 +92,7 @@
     <footer class="bg-dark text-white text-center py-3">
         &copy; 2023 Catálogo de Roupas
     </footer>
+    <script src="whats.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
