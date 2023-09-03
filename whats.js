@@ -16,10 +16,16 @@ function enviarTodosOsFavoritosViaWhatsApp() {
     favoritos.forEach((product, index) => {
         mensagem += `Item ${index + 1}:\n`;
         mensagem += `Ref: ${product.ref}\n`;
-        mensagem += `Descrição: ${product.description}\n\n`;
+        mensagem += `Cor: ${product.color}\n`;
+        mensagem += `Categoria: ${product.category}\n`;
+        mensagem += `Composição: ${product.composition}\n`;
+        mensagem += `Descrição: ${product.description}\n`;
 
-        // Adicione as imagens como links para as imagens hospedadas online
-        mensagem += `![Imagem${index + 1}](${product.imageUrl})\n\n`; // Substitua "product.imageUrl" pelo campo que contém o URL da imagem
+        // Use o nome do arquivo da imagem (baseado no ref) para criar a URL da imagem
+        const imageName = `${product.ref}.jpg`; // Supondo que a extensão seja .jpg
+        const imageUrl = `https://victor26sp.github.io/Projeto---up4/imagens/${imageName}`; // Substitua com o URL base adequado
+
+        mensagem += `Imagem: ${imageUrl}\n\n`;
     });
 
     const linkWaMe = `https://web.whatsapp.com/send?phone=${numeroDestinatario}&text=${encodeURIComponent(mensagem)}`;
