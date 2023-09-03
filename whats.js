@@ -28,6 +28,17 @@ function enviarTodosOsFavoritosViaWhatsApp() {
         mensagem += `Imagem: ${imageUrl}\n\n`;
     });
 
-    const linkWaMe = `https://web.whatsapp.com/send?phone=${numeroDestinatario}&text=${encodeURIComponent(mensagem)}`;
-    window.open(linkWaMe, '_blank');
+    // Verifique o tipo de dispositivo (desktop ou móvel)
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        // Se for um dispositivo móvel, abra o aplicativo WhatsApp com a mensagem
+        const whatsappAppLink = `whatsapp://send?phone=${numeroDestinatario}&text=${encodeURIComponent(mensagem)}`;
+        window.location.href = whatsappAppLink;
+    } else {
+        // Se for um desktop, abra o WhatsApp Web com a mensagem
+        const linkWaMe = `https://web.whatsapp.com/send?phone=${numeroDestinatario}&text=${encodeURIComponent(mensagem)}`;
+        window.open(linkWaMe, '_blank');
+    }
 }
+
