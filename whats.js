@@ -22,7 +22,7 @@ function enviarTodosOsFavoritosViaWhatsApp() {
         mensagem += `Descrição: ${product.description}\n`;
 
         // Use o nome do arquivo da imagem (baseado no ref) para criar a URL da imagem
-        const imageName = `${product.ref}.jpg`; // Supondo que a extensão seja .jpg
+        const imageName = `${product.image}`; // Supondo que a extensão seja .jpg
         const imageUrl = `https://github.com/victor26sp/Projeto---up4/tree/5e8a37bc9b5143931b9dfb81ef8ab5a351f96f4f/imagens/${imageName}`; // Substitua com o URL base adequado
 
         mensagem += `Imagem: ${imageUrl}\n\n`;
