@@ -23,7 +23,7 @@ function enviarTodosOsFavoritosViaWhatsApp() {
 
         // Use o nome do arquivo da imagem (baseado no ref) para criar a URL da imagem
         const imageName = `${product.ref}.jpg`; // Supondo que a extensão seja .jpg
-        const imageUrl = `https://victor26sp.github.io/Projeto---up4/imagens/${imageName}`; // Substitua com o URL base adequado
+        const imageUrl = `https://drive.google.com/drive/folders/1YF8G_CKyjNjXrCUufqrNfjHJcWxqm6-k?usp=sharing/${imageName}`; // Substitua com o URL base adequado
 
         mensagem += `Imagem: ${imageUrl}\n\n`;
     });
