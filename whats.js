@@ -18,8 +18,8 @@ function enviarTodosOsFavoritosViaWhatsApp() {
         mensagem += `Ref: ${product.ref}\n`;
         mensagem += `Descrição: ${product.description}\n\n`;
 
-        // Adicione as imagens como links
-        mensagem += `![Imagem${index + 1}](${product.image})\n\n`;
+        // Adicione as imagens como links para as imagens hospedadas online
+        mensagem += `![Imagem${index + 1}](${product.imageUrl})\n\n`; // Substitua "product.imageUrl" pelo campo que contém o URL da imagem
     });
 
     const linkWaMe = `https://web.whatsapp.com/send?phone=${numeroDestinatario}&text=${encodeURIComponent(mensagem)}`;
