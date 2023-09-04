@@ -71,25 +71,6 @@ function createSizeGrid(product) {
 
 
 
-function incrementQuantity(index) {
-    const quantityInput = document.querySelectorAll('.quantity-control input')[index];
-    let newValue = parseInt(quantityInput.value) + 1;
-    newValue = Math.min(newValue, parseInt(quantityInput.max)); // Limitar a quantidade ao estoque máximo
-    quantityInput.value = newValue;
-}
-
-function decrementQuantity(index) {
-    const quantityInput = document.querySelectorAll('.quantity-control input')[index];
-    let newValue = parseInt(quantityInput.value) - 1;
-    newValue = Math.max(newValue, 0); // Garantir que a quantidade não seja negativa
-    quantityInput.value = newValue;
-}
-function updateQuantity(index, newValue) {
-    const quantityInput = document.querySelectorAll('.quantity-control input')[index];
-    quantityInput.value = newValue;
-    // Atualize o produto com a nova quantidade selecionada aqui, se necessário.
-}
-
 function renderCatalog(products) {
     catalogDiv.innerHTML = '';
 
