@@ -3,7 +3,8 @@ document.getElementById('sendAllFavoritesButton').addEventListener('click', func
 });
 
 function enviarTodosOsFavoritosViaWhatsApp() {
-    const numeroDestinatario = '+5517996282802'; // Número de telefone padrão
+    const numeroDestinatarioInput = document.getElementById('numeroDestinatario');
+    const numeroDestinatario = numeroDestinatarioInput.value; // Leitura do número de telefone do input
     let mensagem = 'Itens Favoritados:\n\n';
 
     const favoritos = products.filter(product => product.isFavorite);

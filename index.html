@@ -6,7 +6,7 @@
     <title>Catálogo de Roupas</title>
     <meta property="og:title" content="Catálogo EnfaseOficial">
     <meta property="og:description" content="Novidades e lançamentos em primeira mão">
-    <meta property="og:image" content="https://victor26sp.github.io/Projeto---up4/imagens/88115%20CIDRA.jpg">
+    <meta property="og:image" content="https://victor26sp.github.io/Projeto---up4/imagens/88115CIDRA.jpg">
     <meta property="og:url" content="https://victor26sp.github.io/Projeto---up4/">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -18,6 +18,13 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">Catálogo de Roupas</a>
+            
+            <!-- Input e botão para enviar favoritos via WhatsApp -->
+            <div>
+                <label for="numeroDestinatario">Número de Destinatário:</label>
+                <input type="text" id="numeroDestinatario" placeholder="+55 Numero Destinatario">
+                <button onclick="enviarTodosOsFavoritosViaWhatsApp()">Enviar Favoritos via WhatsApp</button>
+            </div>
             
             <!-- Botão de navegação para telas grandes -->
             <button class="navbar-toggler d-none d-lg-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -48,10 +55,12 @@
         </div>
         <div class="offcanvas-body">
             <ul class="navbar-nav">
+                <!-- Botão para imprimir -->
                 <li class="nav-item">
                     <button id="printButton" class="btn btn-primary btn-sm me-2"><i class="fas fa-print"></i> Imprimir</button>
                 </li>
                 <br>
+                <!-- Filtro de Favoritos -->
                 <li class="nav-item">
                     <label class="btn btn-warning btn-sm me-2">
                         <input type="checkbox" id="favoriteFilterInput">
@@ -59,23 +68,19 @@
                     </label>
                 </li>
                 <br>
+                <!-- Botão para limpar filtros -->
                 <li class="nav-item">
                     <button id="clearFiltersButton" class="btn btn-secondary btn-sm"><i class="fas fa-eraser"></i> Limpar Filtros</button>
                 </li>
                 <br>
-                <!-- Botão "Enviar Todos via WhatsApp" -->
-                <li class="nav-item">
-                    <button id="sendAllFavoritesButton" type="button" class="btn btn-success">Enviar Favoritos via WhatsApp</button>
-                </li>
-                <br> 
+                <!-- Container de Filtro por Categoria -->
+                <div id="categoryFilterContainer">
+                    <label for="categoryFilter" class="form-label">Filtrar por Categoria</label>
+                    <select id="categoryFilter" class="form-select">
+                        <option value="">Todas as Categorias</option>
+                    </select>
+                </div>
             </ul>
-            <!-- Category Filter Container -->
-            <div id="categoryFilterContainer">
-                <label for="categoryFilter" class="form-label">Filtrar por Categoria</label>
-                <select id="categoryFilter" class="form-select">
-                    <option value="">Todas as Categorias</option>
-                </select>
-            </div>
         </div>
     </div>
     <!-- Page Content -->
@@ -86,9 +91,11 @@
             </div>
         </div>
     </div>
+    <!-- Rodapé -->
     <footer class="bg-dark text-white text-center py-3">
         &copy; 2023 Catálogo de Roupas
     </footer>
+    <!-- Scripts -->
     <script src="whats.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>

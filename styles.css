@@ -244,21 +244,9 @@ body::-webkit-scrollbar-thumb:hover {
     .printable-text {
         font-size: 1.2rem;
     }
-
-    /* Botão de navegação */
-    .navbar-toggler {
-        margin-top: 1rem;
-    }
-    /* Exibição do botão Offcanvas na impressão */
-    #offcanvasNavbar {
-        display: block !important;
-    }
-    /* Oculta a navegação principal na impressão */
-    #navbarNav {
-        display: none !important;
-    }
 }
-    /* Estilos para o contêiner do carrinho */
+
+/* Estilos para o contêiner do carrinho */
 #cart {
     background-color: #f8f9fa;
     padding: 20px;
@@ -293,6 +281,7 @@ body::-webkit-scrollbar-thumb:hover {
 #checkout-button {
     margin-top: 20px;
 }
+
 /* Estilos para o botão de carrinho de compras */
 #cart-button {
     background-color: #28a745; /* Cor de fundo do botão */
@@ -318,7 +307,6 @@ body::-webkit-scrollbar-thumb:hover {
     margin-right: 10px; /* Espaçamento à direita do ícone */
 }
 
-/* Adicione esta classe personalizada ao seu arquivo CSS */
 /* Estilos para a grade de tamanhos */
 .size-grid-horizontal {
     display: flex;
@@ -334,6 +322,7 @@ body::-webkit-scrollbar-thumb:hover {
 .size-label {
     margin-right: 5px;
 }
+
 /* Estilos para a tabela de tamanhos */
 .size-grid-container {
     width: 100%; /* Garante que a tabela ocupe toda a largura do card */

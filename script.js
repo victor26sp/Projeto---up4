@@ -2,6 +2,7 @@ const catalogDiv = document.getElementById('catalog');
 let products = [];
 let categoryFilter = '';
 let favoriteFilter = false;
+let skuToProductMap = {}; // Mapeamento SKU para produtos
 
 function toggleFavorite(btn) {
     btn.classList.toggle('btn-danger');
@@ -33,14 +34,14 @@ function createSizeGrid(product) {
     table.classList.add('table', 'table-bordered', 'table-sm', 'size-grid');
     table.style.maxWidth = '100%';
     const headerRow = table.insertRow(0);
-    product.sizes.forEach((size, index) => {
+    product.sizes.forEach((sizeObj, index) => {
         const cell = headerRow.insertCell(index);
-        cell.textContent = size;
+        cell.textContent = sizeObj.size;
         cell.classList.add('fw-bold');
     });
 
     const quantityRow = table.insertRow(1);
-    product.sizes.forEach((size, index) => {
+    product.sizes.forEach((sizeObj, index) => {
         const cell = quantityRow.insertCell(index);
         cell.classList.add('text-center');
 
@@ -51,7 +52,7 @@ function createSizeGrid(product) {
         quantityInput.classList.add('form-control', 'text-center');
         quantityInput.type = 'number';
         quantityInput.min = 0;
-        quantityInput.max = product.stock;
+        quantityInput.max = sizeObj.stock; // Use o estoque correspondente ao tamanho
         quantityInput.value = '0';
 
         const inputGroupText = document.createElement('span');
@@ -68,8 +69,6 @@ function createSizeGrid(product) {
 
     return sizeGridContainer;
 }
-
-
 
 function renderCatalog(products) {
     catalogDiv.innerHTML = '';
@@ -90,7 +89,7 @@ function renderCatalog(products) {
 
         const card = document.createElement('div');
         card.classList.add('card', 'h-100');
-        const sizes = product.sizes.join(', ');
+        const sizes = product.sizes.map(sizeObj => sizeObj.size).join(', ');
 
         card.innerHTML = `
         <img src="imagens/${product.image}" class="card-img-top" alt="${product.description}">
@@ -116,13 +115,13 @@ function renderCatalog(products) {
     });
 }
 
-
 function importCSV(file) {
     fetch(file)
         .then(response => response.text())
         .then(data => {
             const lines = data.split('\n');
             products = [];
+            skuToProductMap = {}; // Limpe o mapeamento
 
             for (let i = 1; i < lines.length; i++) {
                 const line = lines[i].trim();
@@ -134,20 +133,41 @@ function importCSV(file) {
                 const existingProduct = products.find(product => product.image === image);
 
                 if (!existingProduct) {
-                    products.push({
+                    const product = {
                         ref,
                         description,
                         category,
                         color,
                         composition,
                         image,
-                        sizes: [size],
-                        stock: parseInt(stock),
-                        selectedQuantity: 0,
+                        sizes: [], // Inicialize um array vazio de tamanhos
                         isFavorite: false,
-                    });
+                        sku, // Adicione o SKU ao objeto do produto
+                    };
+
+                    // Adicione o produto ao mapeamento SKU
+                    skuToProductMap[sku] = product;
+
+                    // Crie um objeto de tamanho com tamanho e estoque correspondentes
+                    const sizeObj = {
+                        size,
+                        stock: parseInt(stock),
+                    };
+
+                    // Adicione o objeto de tamanho ao array de tamanhos do produto
+                    product.sizes.push(sizeObj);
+
+                    products.push(product);
                 } else {
-                    existingProduct.sizes.push(size);
+                    // Verifique se já existe um tamanho com o mesmo nome e, se não, adicione-o
+                    const existingSize = existingProduct.sizes.find(existingSize => existingSize.size === size);
+                    if (!existingSize) {
+                        const sizeObj = {
+                            size,
+                            stock: parseInt(stock),
+                        };
+                        existingProduct.sizes.push(sizeObj);
+                    }
                 }
             }
 
@@ -215,7 +235,6 @@ function generatePrintableHTML(products) {
                 <p class="printable-text">${product.composition}</p>
                 <div class="sizes-section">
                     <p class="printable-text">Tamanhos Disponíveis: ${product.sizes.join(', ')}</p>
-                    <p class="printable-text">Quantidade Selecionada: ${product.selectedQuantity}</p>
                 </div>
                 <img src="./imagens/${product.image}" class="printable-image" alt="${product.description}">
             </div>
