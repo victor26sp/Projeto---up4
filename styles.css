@@ -257,7 +257,7 @@ body::-webkit-scrollbar-thumb:hover {
     #navbarNav {
         display: none !important;
     }
-
+}
     /* Estilos para o contêiner do carrinho */
 #cart {
     background-color: #f8f9fa;
@@ -318,6 +318,32 @@ body::-webkit-scrollbar-thumb:hover {
     margin-right: 10px; /* Espaçamento à direita do ícone */
 }
 
-    /* ... Outros estilos ... */
-
+/* Adicione esta classe personalizada ao seu arquivo CSS */
+/* Estilos para a grade de tamanhos */
+.size-grid-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Espaçamento entre os tamanhos */
 }
+
+.size-item {
+    display: flex;
+    align-items: center;
+}
+
+.size-label {
+    margin-right: 5px;
+}
+/* Estilos para a tabela de tamanhos */
+.size-grid-container {
+    width: 100%; /* Garante que a tabela ocupe toda a largura do card */
+    text-align: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+.size-grid {
+    width: 100%; /* Define uma largura de 100% para que a tabela corresponda à largura do card */
+    max-width: 100%; /* Define a largura máxima como 100% */
+    margin: 0 auto; /* Centraliza a tabela horizontalmente */
+}
+
+/* Outros estilos da tabela de tamanhos... */

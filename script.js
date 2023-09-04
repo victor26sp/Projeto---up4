@@ -21,6 +21,75 @@ function clearFavorites() {
     renderCatalog(products);
 }
 
+function createSizeGrid(product) {
+    const sizeGridContainer = document.createElement('div');
+    sizeGridContainer.classList.add('size-grid-container');
+
+    // Adicione a classe 'table-responsive' para tornar a tabela responsiva
+    const sizeGrid = document.createElement('div');
+    sizeGrid.classList.add('table-responsive'); // Adicione a classe 'table-responsive'
+
+    const table = document.createElement('table');
+    table.classList.add('table', 'table-bordered', 'table-sm', 'size-grid');
+    table.style.maxWidth = '100%';
+    const headerRow = table.insertRow(0);
+    product.sizes.forEach((size, index) => {
+        const cell = headerRow.insertCell(index);
+        cell.textContent = size;
+        cell.classList.add('fw-bold');
+    });
+
+    const quantityRow = table.insertRow(1);
+    product.sizes.forEach((size, index) => {
+        const cell = quantityRow.insertCell(index);
+        cell.classList.add('text-center');
+
+        const inputGroup = document.createElement('div');
+        inputGroup.classList.add('input-group', 'mb-3');
+
+        const quantityInput = document.createElement('input');
+        quantityInput.classList.add('form-control', 'text-center');
+        quantityInput.type = 'number';
+        quantityInput.min = 0;
+        quantityInput.max = product.stock;
+        quantityInput.value = '0';
+
+        const inputGroupText = document.createElement('span');
+        inputGroupText.classList.add('input-group-text');
+        inputGroupText.textContent = 'Qtd';
+
+        inputGroup.appendChild(quantityInput);
+        inputGroup.appendChild(inputGroupText);
+        cell.appendChild(inputGroup);
+    });
+
+    sizeGrid.appendChild(table);
+    sizeGridContainer.appendChild(sizeGrid);
+
+    return sizeGridContainer;
+}
+
+
+
+function incrementQuantity(index) {
+    const quantityInput = document.querySelectorAll('.quantity-control input')[index];
+    let newValue = parseInt(quantityInput.value) + 1;
+    newValue = Math.min(newValue, parseInt(quantityInput.max)); // Limitar a quantidade ao estoque máximo
+    quantityInput.value = newValue;
+}
+
+function decrementQuantity(index) {
+    const quantityInput = document.querySelectorAll('.quantity-control input')[index];
+    let newValue = parseInt(quantityInput.value) - 1;
+    newValue = Math.max(newValue, 0); // Garantir que a quantidade não seja negativa
+    quantityInput.value = newValue;
+}
+function updateQuantity(index, newValue) {
+    const quantityInput = document.querySelectorAll('.quantity-control input')[index];
+    quantityInput.value = newValue;
+    // Atualize o produto com a nova quantidade selecionada aqui, se necessário.
+}
+
 function renderCatalog(products) {
     catalogDiv.innerHTML = '';
 
@@ -40,25 +109,32 @@ function renderCatalog(products) {
 
         const card = document.createElement('div');
         card.classList.add('card', 'h-100');
+        const sizes = product.sizes.join(', ');
+
         card.innerHTML = `
-            <img src="imagens/${product.image}" class="card-img-top" alt="${product.description}">
-            <div class="card-body">
-                <h5 class="card-title">${product.description}</h5>
-                <p class="card-text">Ref: ${product.ref}</p>
-                <p class="card-text">Cor: ${product.color}</p>
-                <p class="card-text">${product.category}</p>
-                <p class="card-text">${product.composition}</p>
-                <a href="#" class="btn ${product.isFavorite ? 'btn-danger' : 'btn-primary'} btn-sm" 
-                    data-index="${index}" onclick="toggleFavorite(this); event.preventDefault();">
-                    ${product.isFavorite ? 'Desfavoritar ❤' : 'Favoritar ❤'}
-                </a>
+        <img src="imagens/${product.image}" class="card-img-top" alt="${product.description}">
+        <div class="card-body">
+            <h5 class="card-title">${product.description}</h5>
+            <p class="card-text">Ref: ${product.ref}</p>
+            <p class="card-text">Cor: ${product.color}</p>
+            <p class="card-text">${product.category}</p>
+            <p class="card-text">${product.composition}</p>
+            <div class="sizes-section">
+                <p class="card-text">Tamanhos Disponíveis: ${sizes}</p>
+                <p class="size-grid">${createSizeGrid(product).outerHTML}</p>
             </div>
+            <a href="#" class="btn ${product.isFavorite ? 'btn-danger' : 'btn-primary'} btn-sm"
+                data-index="${index}" onclick="toggleFavorite(this); event.preventDefault();">
+                ${product.isFavorite ? 'Desfavoritar ❤' : 'Favoritar ❤'}
+            </a>
+        </div>
         `;
 
         col.appendChild(card);
         catalogDiv.appendChild(col);
     });
 }
+
 
 function importCSV(file) {
     fetch(file)
@@ -68,22 +144,30 @@ function importCSV(file) {
             products = [];
 
             for (let i = 1; i < lines.length; i++) {
-                const line = lines[i].trim(); // Remove espaços em branco no início e no final
+                const line = lines[i].trim();
                 if (line.length === 0) {
-                    // Se a linha estiver em branco, pare de ler o arquivo
                     break;
                 }
-                
-                const [ref, description, category, color, composition, image] = line.split(';');
-                products.push({
-                    ref,
-                    description,
-                    category,
-                    color,
-                    composition,
-                    image,
-                    isFavorite: false
-                });
+
+                const [ref, description, category, color, composition, sku, stock, size, image] = line.split(';');
+                const existingProduct = products.find(product => product.image === image);
+
+                if (!existingProduct) {
+                    products.push({
+                        ref,
+                        description,
+                        category,
+                        color,
+                        composition,
+                        image,
+                        sizes: [size],
+                        stock: parseInt(stock),
+                        selectedQuantity: 0,
+                        isFavorite: false,
+                    });
+                } else {
+                    existingProduct.sizes.push(size);
+                }
             }
 
             renderCatalog(products);
@@ -111,7 +195,7 @@ function printCatalog() {
     const favoriteProducts = getFavoriteProducts();
 
     if (favoriteProducts.length === 0) {
-        alert("Nenhum item favoritado para imprimir.");
+        alert('Nenhum item favoritado para imprimir.');
         return;
     }
 
@@ -139,29 +223,35 @@ function generatePrintableHTML(products) {
     const itemsPerPage = 4;
     let currentPageItems = '';
 
-    const printableContent = products.map((product, index) => {
-        currentPageItems += `
+    const printableContent = products
+        .map((product, index) => {
+            currentPageItems += `
             <div class="printable-card">
                 <h2 class="printable-title">${product.description}</h2>
                 <p class="printable-text">Ref: ${product.ref}</p>
                 <p class="printable-text">Cor: ${product.color}</p>
                 <p class="printable-text">${product.category}</p>
                 <p class="printable-text">${product.composition}</p>
+                <div class="sizes-section">
+                    <p class="printable-text">Tamanhos Disponíveis: ${product.sizes.join(', ')}</p>
+                    <p class="printable-text">Quantidade Selecionada: ${product.selectedQuantity}</p>
+                </div>
                 <img src="./imagens/${product.image}" class="printable-image" alt="${product.description}">
             </div>
         `;
 
-        if ((index + 1) % itemsPerPage === 0 || index === products.length - 1) {
-            const page = `
+            if ((index + 1) % itemsPerPage === 0 || index === products.length - 1) {
+                const page = `
                 <div class="printable-page">
                     ${currentPageItems}
                 </div>
             `;
-            currentPageItems = '';
-            return page;
-        }
-        return '';
-    }).join('');
+                currentPageItems = '';
+                return page;
+            }
+            return '';
+        })
+        .join('');
 
     const printableHTML = `
         <html>
@@ -194,6 +284,34 @@ function generatePrintableHTML(products) {
                 .printable-page {
                     page-break-after: always;
                     padding: 20px;
+                }
+                .sizes-section {
+                    margin-top: 10px;
+                }
+                .size-grid {
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+                .size-grid th,
+                .size-grid td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: center;
+                }
+                .size-grid th {
+                    background-color: #f2f2f2;
+                }
+                .quantity-control {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .quantity-control button {
+                    background-color: #007bff;
+                    color: #fff;
+                    border: none;
+                    padding: 5px 10px;
+                    cursor: pointer;
                 }
             </style>
         </head>
@@ -228,4 +346,3 @@ document.getElementById('categoryFilterButton').addEventListener('click', functi
     const categoryFilterContainer = document.getElementById('categoryFilterContainer');
     categoryFilterContainer.classList.toggle('d-none');
 });
-
