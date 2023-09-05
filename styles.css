@@ -9,20 +9,69 @@ body {
 
 /* Estilos para o cabeçalho */
 .navbar {
-    background-color: #daec0f;
+    background-color: #333; /* Cor de fundo da barra de navegação */
     margin-bottom: 20px;
     border-bottom: 3px solid #8fbf00; /* Linha de separação na parte inferior do cabeçalho */
+    transition: background-color 0.3s; /* Efeito de transição suave */
 }
 
 .navbar-brand {
-    font-size: 1.8rem;
+    font-size: 2rem; /* Tamanho maior para o logotipo */
     font-weight: bold;
     margin-right: 20px;
-    color: #333; /* Cor do texto do logotipo */
+    color: #daec0f; /* Cor do texto do logotipo */
+    transition: color 0.3s; /* Efeito de transição suave para a cor do logotipo */
+}
+
+.navbar-brand:hover {
+    color: #fff; /* Cor do texto do logotipo ao passar o mouse */
 }
 
 .navbar-toggler-icon {
-    background-color: white;
+    background-color: #daec0f; /* Cor das barras do ícone de navegação */
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+    position: relative;
+    transition: transform 0.3s, opacity 0.3s;
+    display: block;
+}
+
+/* Estilo das barras horizontais do ícone */
+.navbar-toggler-icon::before, .navbar-toggler-icon::after {
+    content: "";
+    background-color: #daec0f; /* Cor das barras horizontais */
+    width: 60px;
+    height: 10px;
+    border-radius: 2px;
+    position: relative;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Estilo das barras horizontais do ícone */
+.navbar-toggler-icon::before {
+    top: -8px;
+    transform-origin: 0 0;
+}
+
+.navbar-toggler-icon::after {
+    top: 8px;
+    transform-origin: 0 100%;
+}
+
+/* Efeito de animação ao passar o mouse sobre o botão de navegação */
+.navbar-toggler-icon:hover {
+    transform: rotate(90deg);
+}
+
+.navbar-toggler-icon:hover::before {
+    transform: translateY(0) rotate(45deg);
+    opacity: 0.7;
+}
+
+.navbar-toggler-icon:hover::after {
+    transform: translateY(0) rotate(-45deg);
+    opacity: 0.7;
 }
 
 /* Estilos para o botão de impressão */
@@ -36,44 +85,48 @@ body {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
+    text-transform: uppercase; /* Transforma o texto em maiúsculas */
 }
 
 #printButton:hover {
     background-color: #0056b3;
 }
+/* Restante do seu CSS... */
+
 
 /* Estilos para as cartas */
 .card {
     margin-bottom: 20px;
     border: none;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombras mais suaves */
+    transition: transform 0.2s, box-shadow 0.2s;
     background-color: white;
     border-radius: 8px;
-    padding: 15px;
+    padding: 20px;
     height: 100%; /* Definindo altura fixa */
     display: flex;
     flex-direction: column;
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px); /* Eleva a carta ao passar o mouse */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra maior no hover */
 }
 
 .card-title {
-    font-size: 1rem; /* Tamanho menor para o título da carta */
+    font-size: 1.2rem; /* Tamanho do título da carta */
     margin-bottom: 10px;
     font-weight: bold;
     color: #333;
 }
 
 .card-text {
-    font-size: 0.9rem; /* Tamanho menor para o texto da carta */
+    font-size: 1rem; /* Tamanho do texto da carta */
     color: #555;
     margin-bottom: 10px;
     flex-grow: 1; /* Permite que o texto ocupe o espaço restante na carta */
 }
+
 
 /* Estilos para a barra de rolagem */
 body::-webkit-scrollbar {

@@ -1,8 +1,10 @@
 const catalogDiv = document.getElementById('catalog');
+const cartContainer = document.getElementById('cart');
 let products = [];
 let categoryFilter = '';
 let favoriteFilter = false;
 let skuToProductMap = {}; // Mapeamento SKU para produtos
+let cartItems = [];
 
 function toggleFavorite(btn) {
     btn.classList.toggle('btn-danger');
@@ -25,15 +27,14 @@ function clearFavorites() {
 function createSizeGrid(product) {
     const sizeGridContainer = document.createElement('div');
     sizeGridContainer.classList.add('size-grid-container');
-
-    // Adicione a classe 'table-responsive' para tornar a tabela responsiva
     const sizeGrid = document.createElement('div');
-    sizeGrid.classList.add('table-responsive'); // Adicione a classe 'table-responsive'
+    sizeGrid.classList.add('table-responsive');
 
     const table = document.createElement('table');
     table.classList.add('table', 'table-bordered', 'table-sm', 'size-grid');
     table.style.maxWidth = '100%';
     const headerRow = table.insertRow(0);
+
     product.sizes.forEach((sizeObj, index) => {
         const cell = headerRow.insertCell(index);
         cell.textContent = sizeObj.size;
@@ -41,6 +42,7 @@ function createSizeGrid(product) {
     });
 
     const quantityRow = table.insertRow(1);
+
     product.sizes.forEach((sizeObj, index) => {
         const cell = quantityRow.insertCell(index);
         cell.classList.add('text-center');
@@ -52,16 +54,35 @@ function createSizeGrid(product) {
         quantityInput.classList.add('form-control', 'text-center');
         quantityInput.type = 'number';
         quantityInput.min = 0;
-        quantityInput.max = sizeObj.stock; // Use o estoque correspondente ao tamanho
+        quantityInput.max = sizeObj.stock; // Defina o estoque máximo disponível
         quantityInput.value = '0';
 
         const inputGroupText = document.createElement('span');
         inputGroupText.classList.add('input-group-text');
         inputGroupText.textContent = 'Qtd';
 
+        const quantityMessage = document.createElement('div');
+        quantityMessage.classList.add('alert', 'alert-danger', 'mt-2'); // Classes de alerta Bootstrap
+        quantityMessage.textContent = 'Quantidade máxima atingida.';
+        quantityMessage.style.display = 'none'; // Inicialmente, oculte a mensagem de erro
+
         inputGroup.appendChild(quantityInput);
         inputGroup.appendChild(inputGroupText);
         cell.appendChild(inputGroup);
+        cell.appendChild(quantityMessage);
+
+        // Adicione um evento de alteração ao campo de quantidade
+        quantityInput.addEventListener('change', () => {
+            const selectedQuantity = parseInt(quantityInput.value);
+            
+            if (selectedQuantity > sizeObj.stock) {
+                // Se a quantidade selecionada for maior que o estoque, exiba a mensagem
+                quantityMessage.style.display = 'block'; // Exiba a mensagem de erro
+                quantityInput.value = sizeObj.stock;
+            } else {
+                quantityMessage.style.display = 'none'; // Oculte a mensagem de erro
+            }
+        });
     });
 
     sizeGrid.appendChild(table);
@@ -102,6 +123,7 @@ function renderCatalog(products) {
             <div class="sizes-section">
                 <p class="card-text">Tamanhos Disponíveis: ${sizes}</p>
                 <p class="size-grid">${createSizeGrid(product).outerHTML}</p>
+                <button class="btn btn-primary btn-sm add-to-cart" data-index="${index}">Adicionar ao Carrinho</button>
             </div>
             <a href="#" class="btn ${product.isFavorite ? 'btn-danger' : 'btn-primary'} btn-sm"
                 data-index="${index}" onclick="toggleFavorite(this); event.preventDefault();">
@@ -112,6 +134,14 @@ function renderCatalog(products) {
 
         col.appendChild(card);
         catalogDiv.appendChild(col);
+    });
+
+    // Adicione event listener para botões "Adicionar ao Carrinho"
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            addToCart(button);
+        });
     });
 }
 
@@ -346,3 +376,50 @@ document.getElementById('categoryFilterButton').addEventListener('click', functi
     const categoryFilterContainer = document.getElementById('categoryFilterContainer');
     categoryFilterContainer.classList.toggle('d-none');
 });
+
+function addToCart(product, size, quantity) {
+    const item = {
+        product,
+        size,
+        quantity,
+    };
+    cartItems.push(item);
+    updateCartModal();
+}
+
+// Função para atualizar o modal do carrinho
+function updateCartModal() {
+    const cartTableBody = document.getElementById('cartTableBody');
+    cartTableBody.innerHTML = '';
+
+    cartItems.forEach((item, index) => {
+        const row = cartTableBody.insertRow();
+        const cellIndex = row.insertCell(0);
+        const cellProduct = row.insertCell(1);
+        const cellSize = row.insertCell(2);
+        const cellQuantity = row.insertCell(3);
+
+        cellIndex.innerHTML = index + 1;
+        cellProduct.innerHTML = item.product.description;
+        cellSize.innerHTML = item.size;
+        cellQuantity.innerHTML = item.quantity;
+    });
+    const cartTotal = document.getElementById('cartTotal');
+    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+    cartTotal.textContent = `Total: ${totalQuantity} itens`;
+
+    $('#cartModal').modal('show'); // Abre o modal do carrinho
+}
+
+// Event listener para o botão "Carrinho"
+document.getElementById('openCartButton').addEventListener('click', () => {
+    updateCartModal();
+});
+
+function finalizePurchase() {
+    // Aqui você pode implementar a lógica para finalizar a compra
+    // Por exemplo, enviar os produtos selecionados para um servidor ou exibir um resumo da compra
+    alert('Compra finalizada! Implemente sua lógica aqui.');
+    cart = []; // Limpe o carrinho após a compra
+    updateCartDisplay();
+}
