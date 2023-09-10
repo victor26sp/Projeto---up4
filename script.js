@@ -122,8 +122,6 @@ function renderCatalog(products) {
             <p class="card-text">${product.composition}</p>
             <div class="sizes-section">
                 <p class="card-text">Tamanhos Disponíveis: ${sizes}</p>
-                <p class="size-grid">${createSizeGrid(product).outerHTML}</p>
-                <button class="btn btn-primary btn-sm add-to-cart" data-index="${index}">Adicionar ao Carrinho</button>
             </div>
             <a href="#" class="btn ${product.isFavorite ? 'btn-danger' : 'btn-primary'} btn-sm"
                 data-index="${index}" onclick="toggleFavorite(this); event.preventDefault();">
@@ -251,35 +249,27 @@ function getFavoriteProducts() {
 }
 
 function generatePrintableHTML(products) {
-    const itemsPerPage = 4;
-    let currentPageItems = '';
+    const itemsPerPage = 1; // Cada item em uma página A4
 
     const printableContent = products
         .map((product, index) => {
-            currentPageItems += `
-            <div class="printable-card">
-                <h2 class="printable-title">${product.description}</h2>
-                <p class="printable-text">Ref: ${product.ref}</p>
-                <p class="printable-text">Cor: ${product.color}</p>
-                <p class="printable-text">${product.category}</p>
-                <p class="printable-text">${product.composition}</p>
-                <div class="sizes-section">
-                    <p class="printable-text">Tamanhos Disponíveis: ${product.sizes.join(', ')}</p>
+            const sizes = product.sizes.map(sizeObj => sizeObj.size).join(', ');
+
+            return `
+            <div class="printable-page">
+                <div class="printable-card">
+                    <h2 class="printable-title">${product.description}</h2>
+                    <p class="printable-text">Ref: ${product.ref}</p>
+                    <p class="printable-text">Cor: ${product.color}</p>
+                    <p class="printable-text">${product.category}</p>
+                    <p class="printable-text">${product.composition}</p>
+                    <div class="sizes-section">
+                        <p class="printable-text">Tamanhos Disponíveis: ${sizes}</p>
+                    </div>
+                    <img src="./imagens/${product.image}" class="printable-image" alt="${product.description}">
                 </div>
-                <img src="./imagens/${product.image}" class="printable-image" alt="${product.description}">
             </div>
         `;
-
-            if ((index + 1) % itemsPerPage === 0 || index === products.length - 1) {
-                const page = `
-                <div class="printable-page">
-                    ${currentPageItems}
-                </div>
-            `;
-                currentPageItems = '';
-                return page;
-            }
-            return '';
         })
         .join('');
 
@@ -292,11 +282,12 @@ function generatePrintableHTML(products) {
                     font-family: Arial, sans-serif;
                 }
                 .printable-card {
-                    page-break-inside: avoid;
                     padding: 20px;
                     border: 1px solid #ccc;
-                    margin: 20px;
+                    margin: 20px 0;
                     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+                    page-break-inside: avoid;
+                    page-break-before: always; /* Iniciar nova página para cada item */
                 }
                 .printable-title {
                     font-size: 1.5rem;
@@ -307,13 +298,10 @@ function generatePrintableHTML(products) {
                     color: #555;
                 }
                 .printable-image {
-                    max-width: 100%;
+                    max-width: 70%;
                     height: auto;
                     margin-top: 10px;
-                }
-                .printable-page {
-                    page-break-after: always;
-                    padding: 20px;
+                    
                 }
                 .sizes-section {
                     margin-top: 10px;
@@ -354,6 +342,7 @@ function generatePrintableHTML(products) {
     return printableHTML;
 }
 
+
 document.getElementById('printButton').addEventListener('click', printCatalog);
 
 document.getElementById('categoryFilter').addEventListener('change', function () {
@@ -376,50 +365,3 @@ document.getElementById('categoryFilterButton').addEventListener('click', functi
     const categoryFilterContainer = document.getElementById('categoryFilterContainer');
     categoryFilterContainer.classList.toggle('d-none');
 });
-
-function addToCart(product, size, quantity) {
-    const item = {
-        product,
-        size,
-        quantity,
-    };
-    cartItems.push(item);
-    updateCartModal();
-}
-
-// Função para atualizar o modal do carrinho
-function updateCartModal() {
-    const cartTableBody = document.getElementById('cartTableBody');
-    cartTableBody.innerHTML = '';
-
-    cartItems.forEach((item, index) => {
-        const row = cartTableBody.insertRow();
-        const cellIndex = row.insertCell(0);
-        const cellProduct = row.insertCell(1);
-        const cellSize = row.insertCell(2);
-        const cellQuantity = row.insertCell(3);
-
-        cellIndex.innerHTML = index + 1;
-        cellProduct.innerHTML = item.product.description;
-        cellSize.innerHTML = item.size;
-        cellQuantity.innerHTML = item.quantity;
-    });
-    const cartTotal = document.getElementById('cartTotal');
-    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-    cartTotal.textContent = `Total: ${totalQuantity} itens`;
-
-    $('#cartModal').modal('show'); // Abre o modal do carrinho
-}
-
-// Event listener para o botão "Carrinho"
-document.getElementById('openCartButton').addEventListener('click', () => {
-    updateCartModal();
-});
-
-function finalizePurchase() {
-    // Aqui você pode implementar a lógica para finalizar a compra
-    // Por exemplo, enviar os produtos selecionados para um servidor ou exibir um resumo da compra
-    alert('Compra finalizada! Implemente sua lógica aqui.');
-    cart = []; // Limpe o carrinho após a compra
-    updateCartDisplay();
-}

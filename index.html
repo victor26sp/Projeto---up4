@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Roupas</title>
-    <meta property="og:title" content="Catálogo EnfaseOficial">
-    <meta property="og:description" content="Novidades e lançamentos em primeira mão">
+    <meta property="og:title" content="Catálogo de Roupas">
+    <meta property="og:description" content="Novidades e lançamentos em Primeira Mão">
     <meta property="og:image" content="https://victor26sp.github.io/Projeto---up4/imagens/88115CIDRA.jpg">
     <meta property="og:url" content="https://victor26sp.github.io/Projeto---up4/">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -14,38 +15,29 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
 
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <div class="container">
-            <a class="navbar-brand" href="#">Catálogo de Roupas</a>
+            <a class="navbar-brand" href="index.html">Catálogo de Roupas</a>
 
-            <button id="openCartButton" class="btn btn-primary btn-sm"><i class="fas fa-shopping-cart"></i> Carrinho</button>
-
-            
-            <!-- Input e botão para enviar favoritos via WhatsApp -->
-            <div class="container mt-3">
-                <div class="form-group">
-                    <label for="numeroDestinatario">Número de Destinatário:</label>
-                    <input type="text" class="form-control" id="numeroDestinatario" placeholder="+55 Número Destinatário">
-                </div>
-                <button class="btn btn-primary btn-whatsapp" onclick="enviarTodosOsFavoritosViaWhatsApp()">Enviar Favoritos via WhatsApp</button>
-            </div>
-      
             <!-- Botão de navegação para telas grandes -->
-            <button class="navbar-toggler d-none d-lg-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler d-none d-lg-block" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-           
+
             <!-- Botão de navegação para telas pequenas -->
-            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <!-- Fim do botão de navegação -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -56,7 +48,8 @@
     </nav>
 
     <!-- Offcanvas Navbar -->
-    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Catálogo de Roupas</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -66,7 +59,8 @@
 
                 <!-- Botão para imprimir -->
                 <li class="nav-item">
-                    <button id="printButton" class="btn btn-primary btn-sm me-2"><i class="fas fa-print"></i> Imprimir</button>
+                    <button id="printButton" class="btn btn-primary btn-sm me-2"><i class="fas fa-print"></i>
+                        Imprimir</button>
                 </li>
                 <br>
                 <!-- Filtro de Favoritos -->
@@ -79,8 +73,20 @@
                 <br>
                 <!-- Botão para limpar filtros -->
                 <li class="nav-item">
-                    <button id="clearFiltersButton" class="btn btn-secondary btn-sm"><i class="fas fa-eraser"></i> Limpar Filtros</button>
+                    <button id="clearFiltersButton" class="btn btn-secondary btn-sm"><i class="fas fa-eraser"></i>
+                        Limpar Filtros</button>
                 </li>
+                <br>
+                <!-- Input e botão para enviar favoritos via WhatsApp -->
+                <div class="container mt-3">
+                    <div class="form-group">
+                        <label for="numeroDestinatario">Número de Destinatário:</label>
+                        <input type="text" class="form-control" id="numeroDestinatario"
+                            placeholder="+55 Número Destinatário">
+                    </div>
+                    <button class="btn btn-primary btn-whatsapp" onclick="enviarTodosOsFavoritosViaWhatsApp()">Enviar
+                        Favoritos via WhatsApp</button>
+                </div>
                 <br>
                 <!-- Container de Filtro por Categoria -->
                 <div id="categoryFilterContainer">
@@ -100,45 +106,14 @@
             </div>
         </div>
     </div>
-    
-<!-- Carrinho -->
-<div id="cartModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cartModalLabel">Carrinho de Compras</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Tamanho</th>
-                            <th>Quantidade</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cartItems">
-                        <!-- Itens do carrinho serão adicionados aqui -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <a href="carrinho.html" class="btn btn-primary">Visualizar Carrinho</a>
-            </div>
-        </div>
-    </div>
-</div>
     <!-- Rodapé -->
     <footer class="bg-dark text-white text-center py-3">
-        &copy; 2023 Catálogo de Roupas
+        &copy; 2023 victor15sp
     </footer>
     <!-- Scripts -->
     <script src="whats.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

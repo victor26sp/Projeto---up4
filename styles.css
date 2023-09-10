@@ -4,31 +4,40 @@ body {
     margin: 0;
     padding: 0;
     background-color: #F3F3F3;
-    color: #333; /* Cor do texto padrão */
+    color: #333;
+    /* Cor do texto padrão */
 }
 
 /* Estilos para o cabeçalho */
 .navbar {
-    background-color: #333; /* Cor de fundo da barra de navegação */
+    background-color: #333;
+    /* Cor de fundo da barra de navegação */
     margin-bottom: 20px;
-    border-bottom: 3px solid #8fbf00; /* Linha de separação na parte inferior do cabeçalho */
-    transition: background-color 0.3s; /* Efeito de transição suave */
+    border-bottom: 3px solid #8fbf00;
+    /* Linha de separação na parte inferior do cabeçalho */
+    transition: background-color 0.3s;
+    /* Efeito de transição suave */
 }
 
 .navbar-brand {
-    font-size: 2rem; /* Tamanho maior para o logotipo */
+    font-size: 2rem;
+    /* Tamanho maior para o logotipo */
     font-weight: bold;
     margin-right: 20px;
-    color: #daec0f; /* Cor do texto do logotipo */
-    transition: color 0.3s; /* Efeito de transição suave para a cor do logotipo */
+    color: #daec0f;
+    /* Cor do texto do logotipo */
+    transition: color 0.3s;
+    /* Efeito de transição suave para a cor do logotipo */
 }
 
 .navbar-brand:hover {
-    color: #fff; /* Cor do texto do logotipo ao passar o mouse */
+    color: #fff;
+    /* Cor do texto do logotipo ao passar o mouse */
 }
 
 .navbar-toggler-icon {
-    background-color: #daec0f; /* Cor das barras do ícone de navegação */
+    background-color: #daec0f;
+    /* Cor das barras do ícone de navegação */
     width: 30px;
     height: 3px;
     border-radius: 2px;
@@ -38,9 +47,11 @@ body {
 }
 
 /* Estilo das barras horizontais do ícone */
-.navbar-toggler-icon::before, .navbar-toggler-icon::after {
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
     content: "";
-    background-color: #daec0f; /* Cor das barras horizontais */
+    background-color: #daec0f;
+    /* Cor das barras horizontais */
     width: 60px;
     height: 10px;
     border-radius: 2px;
@@ -81,66 +92,77 @@ body {
     color: white;
     border: none;
     font-weight: bold;
-    padding: 10px 20px; /* Aumenta o tamanho do botão */
+    padding: 10px 20px;
+    /* Aumenta o tamanho do botão */
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
-    text-transform: uppercase; /* Transforma o texto em maiúsculas */
+    text-transform: uppercase;
+    /* Transforma o texto em maiúsculas */
 }
 
 #printButton:hover {
     background-color: #0056b3;
 }
-/* Restante do seu CSS... */
-
 
 /* Estilos para as cartas */
 .card {
     margin-bottom: 20px;
     border: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombras mais suaves */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombras mais suaves */
     transition: transform 0.2s, box-shadow 0.2s;
     background-color: white;
     border-radius: 8px;
     padding: 20px;
-    height: 100%; /* Definindo altura fixa */
+    height: 100%;
+    /* Definindo altura fixa */
     display: flex;
     flex-direction: column;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Eleva a carta ao passar o mouse */
-    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra maior no hover */
+    transform: translateY(-5px);
+    /* Eleva a carta ao passar o mouse */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    /* Sombra maior no hover */
 }
 
 .card-title {
-    font-size: 1.2rem; /* Tamanho do título da carta */
+    font-size: 1.2rem;
+    /* Tamanho do título da carta */
     margin-bottom: 10px;
     font-weight: bold;
     color: #333;
 }
 
 .card-text {
-    font-size: 1rem; /* Tamanho do texto da carta */
+    font-size: 1rem;
+    /* Tamanho do texto da carta */
     color: #555;
     margin-bottom: 10px;
-    flex-grow: 1; /* Permite que o texto ocupe o espaço restante na carta */
+    flex-grow: 1;
+    /* Permite que o texto ocupe o espaço restante na carta */
 }
 
 
 /* Estilos para a barra de rolagem */
 body::-webkit-scrollbar {
-    width: 10px; /* Largura da barra de rolagem */
+    width: 10px;
+    /* Largura da barra de rolagem */
     background-color: #f1f1f1;
 }
 
 body::-webkit-scrollbar-track {
-    background-color: transparent; /* Cor do fundo da trilha da barra de rolagem */
+    background-color: transparent;
+    /* Cor do fundo da trilha da barra de rolagem */
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: #888; /* Cor do botão de rolagem */
-    border-radius: 5px; /* Borda arredondada do botão de rolagem */
+    background-color: #888;
+    /* Cor do botão de rolagem */
+    border-radius: 5px;
+    /* Borda arredondada do botão de rolagem */
 }
 
 /* Adiciona um efeito suave ao passar o mouse sobre a barra de rolagem */
@@ -150,12 +172,14 @@ body::-webkit-scrollbar-thumb:hover {
 
 /* Estilos para o botão de favoritar */
 .card .card-body .btn {
-    margin-top: auto; /* Coloca o botão na parte inferior da card-body */
+    margin-top: auto;
+    /* Coloca o botão na parte inferior da card-body */
     background-color: #28a745;
     color: white;
     border: none;
     font-weight: bold;
-    padding: 10px 20px; /* Tamanho fixo do botão */
+    padding: 10px 20px;
+    /* Tamanho fixo do botão */
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -166,45 +190,39 @@ body::-webkit-scrollbar-thumb:hover {
     background-color: #218838;
 }
 
-/* Estilos para o contador de favoritos */
-.favorite-count {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #dc3545;
-    color: white;
-    border-radius: 50%;
-    font-size: 1.2rem; /* Tamanho maior para o contador */
-    vertical-align: middle;
-    margin-left: 10px; /* Espaçamento um pouco maior à esquerda do contador */
-}
-
 /* Estilos responsivos para telas com largura máxima de 768px */
 @media (max-width: 768px) {
     .card {
-        margin-bottom: 20px; /* Espaçamento inferior reduzido para cartas em telas menores */
+        margin-bottom: 20px;
+        /* Espaçamento inferior reduzido para cartas em telas menores */
     }
 
     #categoryFilterContainer {
-        margin-bottom: 20px; /* Margem inferior adicional para o container de filtro de categoria em telas menores */
+        margin-bottom: 20px;
+        /* Margem inferior adicional para o container de filtro de categoria em telas menores */
     }
 
     .d-none {
-        display: none !important; /* Oculta elementos com a classe .d-none em telas menores */
+        display: none !important;
+        /* Oculta elementos com a classe .d-none em telas menores */
     }
 }
 
 /* Estilos para telas maiores que 768px */
 @media (min-width: 769px) {
     .card {
-        margin-bottom: 30px; /* Espaçamento inferior padrão para cartas em telas maiores */
+        margin-bottom: 30px;
+        /* Espaçamento inferior padrão para cartas em telas maiores */
     }
 
     #categoryFilterContainer {
-        margin-bottom: 30px; /* Margem inferior padrão para o container de filtro de categoria em telas maiores */
+        margin-bottom: 30px;
+        /* Margem inferior padrão para o container de filtro de categoria em telas maiores */
     }
 
     .d-none {
-        display: block !important; /* Exibe elementos com a classe .d-none em telas maiores */
+        display: block !important;
+        /* Exibe elementos com a classe .d-none em telas maiores */
     }
 }
 
@@ -214,18 +232,21 @@ body::-webkit-scrollbar-thumb:hover {
     color: white;
     text-align: center;
     padding: 1rem 0;
-    font-size: 1rem; /* Tamanho da fonte */
+    font-size: 1rem;
+    /* Tamanho da fonte */
 }
 
 /* Estilos para os links no rodapé */
 .footer a {
-    color: #daec0f; /* Cor dos links no rodapé */
+    color: #daec0f;
+    /* Cor dos links no rodapé */
     text-decoration: none;
     transition: color 0.2s;
 }
 
 .footer a:hover {
-    color: #bbd308; /* Cor dos links no rodapé ao passar o mouse */
+    color: #bbd308;
+    /* Cor dos links no rodapé ao passar o mouse */
 }
 
 /* Estilo para o ícone do botão de navegação */
@@ -240,7 +261,8 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 /* Estilo das barras horizontais do ícone */
-.navbar-toggler-icon::before, .navbar-toggler-icon::after {
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
     content: "";
     background-color: #333;
     width: 60px;
@@ -278,114 +300,23 @@ body::-webkit-scrollbar-thumb:hover {
 
 /* Estilos para a impressão */
 @media print {
-    body {
-        margin: 0;
-        padding: 0;
-        font-size: 12pt;
-        background-color: white;
-    }
     .printable-card {
         border: 1px solid #ccc;
         margin: 1rem;
         padding: 1rem;
         box-shadow: none;
         page-break-inside: avoid;
+        max-width: 100%;
+        /* Garanta que o conteúdo não exceda o tamanho da página */
     }
+
     .printable-title {
-        font-size: 1.5rem;
-    }
-    .printable-text {
         font-size: 1.2rem;
+        /* Reduza o tamanho da fonte do título */
+    }
+
+    .printable-text {
+        font-size: 1rem;
+        /* Reduza o tamanho da fonte do texto */
     }
 }
-
-/* Estilos para o contêiner do carrinho */
-#cart {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* Estilos para o título do carrinho */
-#cart h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-/* Estilos para a lista de itens do carrinho */
-#cart-items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#cart-items li {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Estilos para o botão de finalizar compra */
-#checkout-button {
-    margin-top: 20px;
-}
-
-/* Estilos para o botão de carrinho de compras */
-#cart-button {
-    background-color: #28a745; /* Cor de fundo do botão */
-    color: white; /* Cor do texto do botão */
-    border: none;
-    font-weight: bold;
-    font-size: 1.2rem; /* Tamanho da fonte */
-    padding: 15px 30px; /* Espaçamento interno para torná-lo maior */
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    text-align: center;
-    text-transform: uppercase; /* Transforma o texto em maiúsculas */
-}
-
-#cart-button:hover {
-    background-color: #218838; /* Cor de fundo do botão ao passar o mouse */
-}
-
-/* Estilos para o ícone do carrinho dentro do botão */
-#cart-icon {
-    font-size: 1.5rem; /* Tamanho do ícone */
-    margin-right: 10px; /* Espaçamento à direita do ícone */
-}
-
-/* Estilos para a grade de tamanhos */
-.size-grid-horizontal {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Espaçamento entre os tamanhos */
-}
-
-.size-item {
-    display: flex;
-    align-items: center;
-}
-
-.size-label {
-    margin-right: 5px;
-}
-
-/* Estilos para a tabela de tamanhos */
-.size-grid-container {
-    width: 100%; /* Garante que a tabela ocupe toda a largura do card */
-    text-align: center; /* Centraliza o conteúdo horizontalmente */
-}
-
-.size-grid {
-    width: 100%; /* Define uma largura de 100% para que a tabela corresponda à largura do card */
-    max-width: 100%; /* Define a largura máxima como 100% */
-    margin: 0 auto; /* Centraliza a tabela horizontalmente */
-}
-
-/* Outros estilos da tabela de tamanhos... */
