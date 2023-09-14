@@ -17,6 +17,7 @@ body {
     /* Linha de separação na parte inferior do cabeçalho */
     transition: background-color 0.3s;
     /* Efeito de transição suave */
+    position: relative;
 }
 
 .navbar-brand {
@@ -35,8 +36,23 @@ body {
     /* Cor do texto do logotipo ao passar o mouse */
 }
 
-.navbar-toggler-icon {
+.navbar-toggler {
     background-color: #daec0f;
+    /* Cor de fundo do botão de navegação */
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.navbar-toggler-icon {
+    background-color: #333;
     /* Cor das barras do ícone de navegação */
     width: 30px;
     height: 3px;
@@ -50,8 +66,7 @@ body {
 .navbar-toggler-icon::before,
 .navbar-toggler-icon::after {
     content: "";
-    background-color: #daec0f;
-    /* Cor das barras horizontais */
+    background-color: #333;
     width: 60px;
     height: 10px;
     border-radius: 2px;
@@ -71,16 +86,16 @@ body {
 }
 
 /* Efeito de animação ao passar o mouse sobre o botão de navegação */
-.navbar-toggler-icon:hover {
+.navbar-toggler:hover {
     transform: rotate(90deg);
 }
 
-.navbar-toggler-icon:hover::before {
+.navbar-toggler:hover .navbar-toggler-icon::before {
     transform: translateY(0) rotate(45deg);
     opacity: 0.7;
 }
 
-.navbar-toggler-icon:hover::after {
+.navbar-toggler:hover .navbar-toggler-icon::after {
     transform: translateY(0) rotate(-45deg);
     opacity: 0.7;
 }
@@ -144,7 +159,6 @@ body {
     flex-grow: 1;
     /* Permite que o texto ocupe o espaço restante na carta */
 }
-
 
 /* Estilos para a barra de rolagem */
 body::-webkit-scrollbar {
@@ -319,4 +333,49 @@ body::-webkit-scrollbar-thumb:hover {
         font-size: 1rem;
         /* Reduza o tamanho da fonte do texto */
     }
+}
+/* Estilos para a área da imagem e vídeo */
+.card-image {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Estilos para a área da imagem e vídeo */
+.card-image {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Estilos para a área da imagem e vídeo */
+.card-image {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Estilo padrão para ocultar o vídeo */
+.video-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa toda a largura do elemento pai */
+    height: 100%; /* Ocupa toda a altura do elemento pai */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro para o vídeo */
+    transition: opacity 0.3s; /* Efeito de transição suave */
+}
+
+/* Estilo para o vídeo quando visível */
+.video-container video {
+    width: 100%; /* Ocupa toda a largura do elemento pai */
+    height: 100%; /* Ocupa toda a altura do elemento pai */
+    opacity: 0; /* Começa invisível */
+}
+
+/* Efeito de transição de fade-in para o vídeo */
+.card-image:hover .video-container {
+    display: block;
+}
+
+.card-image:hover .video-container video {
+    opacity: 1; /* Torna-se visível com transição */
 }

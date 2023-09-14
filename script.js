@@ -74,7 +74,7 @@ function createSizeGrid(product) {
         // Adicione um evento de alteração ao campo de quantidade
         quantityInput.addEventListener('change', () => {
             const selectedQuantity = parseInt(quantityInput.value);
-            
+
             if (selectedQuantity > sizeObj.stock) {
                 // Se a quantidade selecionada for maior que o estoque, exiba a mensagem
                 quantityMessage.style.display = 'block'; // Exiba a mensagem de erro
@@ -113,7 +113,12 @@ function renderCatalog(products) {
         const sizes = product.sizes.map(sizeObj => sizeObj.size).join(', ');
 
         card.innerHTML = `
-        <img src="imagens/${product.image}" class="card-img-top" alt="${product.description}">
+        <div class="card-image" style="position: relative;">
+            <img src="imagens/${product.image}" class="card-img-top" alt="${product.description}">
+            <div class="video-container" id="video-container-${product.sku}" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
+                <video src="videos/${product.video}" class="card-video" style="width: 100%; height: 100%;"></video>
+            </div>
+        </div>
         <div class="card-body">
             <h5 class="card-title">${product.description}</h5>
             <p class="card-text">Ref: ${product.ref}</p>
@@ -128,10 +133,13 @@ function renderCatalog(products) {
                 ${product.isFavorite ? 'Desfavoritar ❤' : 'Favoritar ❤'}
             </a>
         </div>
-        `;
-
+    `;
+    
         col.appendChild(card);
         catalogDiv.appendChild(col);
+
+        // Adicione a funcionalidade de vídeo
+        showVideo(product);
     });
 
     // Adicione event listener para botões "Adicionar ao Carrinho"
@@ -157,7 +165,7 @@ function importCSV(file) {
                     break;
                 }
 
-                const [ref, description, category, color, composition, sku, stock, size, image] = line.split(';');
+                const [ref, description, category, color, composition, sku, stock, size, image, video] = line.split(';');
                 const existingProduct = products.find(product => product.image === image);
 
                 if (!existingProduct) {
@@ -171,6 +179,7 @@ function importCSV(file) {
                         sizes: [], // Inicialize um array vazio de tamanhos
                         isFavorite: false,
                         sku, // Adicione o SKU ao objeto do produto
+                        video, // Adicione o nome do arquivo de vídeo ao objeto do produto
                     };
 
                     // Adicione o produto ao mapeamento SKU
@@ -216,6 +225,29 @@ function populateCategoryFilter() {
         option.textContent = category;
         categoryFilterSelect.appendChild(option);
     });
+}
+
+function showVideo(product) {
+    if (product.video) {
+        const videoContainer = document.getElementById(`video-container-${product.sku}`);
+        const video = document.createElement('video');
+        video.src = `videos/${product.video}`;
+        video.controls = true;
+        video.style.width = '100%'; // Define a largura do vídeo como 100% da div pai
+        video.style.height = '100%'; // Define a altura do vídeo como 100% da div pai
+
+        // Adicione um evento para pausar o vídeo ao tirar o mouse de cima
+        videoContainer.addEventListener('mouseleave', () => {
+            video.pause();
+        });
+
+        // Adicione um evento para reproduzir o vídeo ao passar o mouse sobre a imagem
+        videoContainer.addEventListener('mouseenter', () => {
+            video.play();
+        });
+
+        videoContainer.appendChild(video);
+    }
 }
 
 importCSV('products.csv');
@@ -301,7 +333,7 @@ function generatePrintableHTML(products) {
                     max-width: 70%;
                     height: auto;
                     margin-top: 10px;
-                    
+
                 }
                 .sizes-section {
                     margin-top: 10px;
