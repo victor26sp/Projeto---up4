@@ -410,8 +410,3 @@ document.getElementById('clearFiltersButton').addEventListener('click', function
     favoriteFilter = false;
     renderCatalog(products);
 });
-
-document.getElementById('categoryFilterButton').addEventListener('click', function () {
-    const categoryFilterContainer = document.getElementById('categoryFilterContainer');
-    categoryFilterContainer.classList.toggle('d-none');
-});
