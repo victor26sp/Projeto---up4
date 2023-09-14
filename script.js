@@ -342,6 +342,27 @@ function generatePrintableHTML(products) {
     return printableHTML;
 }
 
+function favoritarTodos() {
+    products.forEach(product => {
+        product.isFavorite = true;
+    });
+    renderCatalog(products);
+}
+
+function desfavoritarTodos() {
+    products.forEach(product => {
+        product.isFavorite = false;
+    });
+    renderCatalog(products);
+}
+
+document.getElementById('favoritarTodos').addEventListener('click', function () {
+    favoritarTodos();
+});
+
+document.getElementById('desfavoritarTodos').addEventListener('click', function () {
+    desfavoritarTodos();
+});
 
 document.getElementById('printButton').addEventListener('click', printCatalog);
 

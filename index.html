@@ -17,27 +17,22 @@
 </head>
 
 <body>
-
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <div class="container">
             <a class="navbar-brand" href="index.html">Catálogo de Roupas</a>
-
             <!-- Botão de navegação para telas grandes -->
             <button class="navbar-toggler d-none d-lg-block" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <!-- Botão de navegação para telas pequenas -->
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <!-- Fim do botão de navegação -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -56,11 +51,11 @@
         </div>
         <div class="offcanvas-body">
             <ul class="navbar-nav">
-
                 <!-- Botão para imprimir -->
                 <li class="nav-item">
-                    <button id="printButton" class="btn btn-primary btn-sm me-2"><i class="fas fa-print"></i>
-                        Imprimir</button>
+                    <button id="printButton" class="btn btn-primary btn-sm me-2">
+                        <i class="fas fa-print"></i> Imprimir
+                    </button>
                 </li>
                 <br>
                 <!-- Filtro de Favoritos -->
@@ -73,10 +68,24 @@
                 <br>
                 <!-- Botão para limpar filtros -->
                 <li class="nav-item">
-                    <button id="clearFiltersButton" class="btn btn-secondary btn-sm"><i class="fas fa-eraser"></i>
-                        Limpar Filtros</button>
+                    <button id="clearFiltersButton" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-eraser"></i> Limpar Filtros
+                    </button>
                 </li>
                 <br>
+                <!-- Favoritar Todos -->
+                <li class="nav-item">
+                    <button id="favoritarTodos" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-star"></i> Favoritar Todos
+                    </button>
+                </li>
+                <br>
+                <!-- Desfavoritar Todos -->
+                <li class="nav-item">
+                    <button id="desfavoritarTodos" class="btn btn-secondary btn-sm">
+                        <i class="far fa-star"></i> Desfavoritar Todos
+                    </button>
+                </li>
                 <!-- Input e botão para enviar favoritos via WhatsApp -->
                 <div class="container mt-3">
                     <div class="form-group">
@@ -84,8 +93,9 @@
                         <input type="text" class="form-control" id="numeroDestinatario"
                             placeholder="+55 Número Destinatário">
                     </div>
-                    <button class="btn btn-primary btn-whatsapp" onclick="enviarTodosOsFavoritosViaWhatsApp()">Enviar
-                        Favoritos via WhatsApp</button>
+                    <button class="btn btn-primary btn-whatsapp" onclick="enviarTodosOsFavoritosViaWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Enviar Favoritos via WhatsApp
+                    </button>
                 </div>
                 <br>
                 <!-- Container de Filtro por Categoria -->
@@ -98,6 +108,7 @@
             </ul>
         </div>
     </div>
+
     <!-- Page Content -->
     <div class="container mt-4">
         <div class="row justify-content-center text-center">
@@ -106,10 +117,12 @@
             </div>
         </div>
     </div>
+
     <!-- Rodapé -->
     <footer class="bg-dark text-white text-center py-3">
         &copy; 2023 victor15sp
     </footer>
+
     <!-- Scripts -->
     <script src="whats.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
