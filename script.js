@@ -107,41 +107,39 @@ function renderCatalog(products) {
     filteredProducts.forEach((product, index) => {
         const col = document.createElement('div');
         col.classList.add('col-md-4', 'mb-4');
-
+    
         const card = document.createElement('div');
         card.classList.add('card', 'h-100');
         const sizes = product.sizes.map(sizeObj => sizeObj.size).join(', ');
-
         card.innerHTML = `
         <div class="card-image" style="position: relative;">
             <img src="imagens/${product.image}" class="card-img-top" alt="${product.description}">
-            <div class="video-container" id="video-container-${product.sku}" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
-                <video src="videos/${product.video}" class="card-video" style="width: 100%; height: 100%;"></video>
-            </div>
+            <div class="video-container" id="video-container-${product.sku}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">${product.description}</h5>
-            <p class="card-text">Ref: ${product.ref}</p>
-            <p class="card-text">Cor: ${product.color}</p>
-            <p class="card-text">${product.category}</p>
-            <p class="card-text">${product.composition}</p>
-            <div class="sizes-section">
-                <p class="card-text">Tamanhos Disponíveis: ${sizes}</p>
-            </div>
-            <a href="#" class="btn ${product.isFavorite ? 'btn-danger' : 'btn-primary'} btn-sm"
-                data-index="${index}" onclick="toggleFavorite(this); event.preventDefault();">
-                ${product.isFavorite ? 'Desfavoritar ❤' : 'Favoritar ❤'}
-            </a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">${product.description}</h5>
+        <p class="card-text">Ref: ${product.ref}</p>
+        <p class="card-text">Cor: ${product.color}</p>
+        <p class="card-text">${product.category}</p>
+        <p class="card-text">${product.composition}</p>
+        <div class="sizes-section">
+            <p class="card-text">Tamanhos Disponíveis: ${sizes}</p>
         </div>
+        <a href="#" class="btn ${product.isFavorite ? 'btn-danger' : 'btn-primary'} btn-sm"
+            data-index="${index}" onclick="toggleFavorite(this); event.preventDefault();">
+            ${product.isFavorite ? 'Desfavoritar ❤' : 'Favoritar ❤'}
+        </a>
+    </div>
     `;
     
         col.appendChild(card);
         catalogDiv.appendChild(col);
-
+    
         // Adicione a funcionalidade de vídeo
         showVideo(product);
     });
-
+    
     // Adicione event listener para botões "Adicionar ao Carrinho"
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
     addToCartButtons.forEach(button => {
@@ -232,18 +230,17 @@ function showVideo(product) {
         const videoContainer = document.getElementById(`video-container-${product.sku}`);
         const video = document.createElement('video');
         video.src = `videos/${product.video}`;
-        video.controls = true;
+        video.autoplay = true; // Inicie a reprodução automaticamente
+        video.loop = true; // Faça o vídeo repetir em um loop
         video.style.width = '100%'; // Define a largura do vídeo como 100% da div pai
         video.style.height = '100%'; // Define a altura do vídeo como 100% da div pai
 
-        // Adicione um evento para pausar o vídeo ao tirar o mouse de cima
-        videoContainer.addEventListener('mouseleave', () => {
-            video.pause();
+        videoContainer.addEventListener('mouseenter', () => {
+            video.play(); // Inicie o vídeo quando o mouse entrar na área
         });
 
-        // Adicione um evento para reproduzir o vídeo ao passar o mouse sobre a imagem
-        videoContainer.addEventListener('mouseenter', () => {
-            video.play();
+        videoContainer.addEventListener('mouseleave', () => {
+            video.pause(); // Pausa o vídeo quando o mouse sair da área
         });
 
         videoContainer.appendChild(video);
