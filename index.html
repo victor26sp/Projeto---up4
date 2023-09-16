@@ -7,13 +7,15 @@
     <title>Catálogo de Roupas</title>
     <meta property="og:title" content="Catálogo de Roupas">
     <meta property="og:description" content="Novidades e lançamentos em Primeira Mão">
-    <meta property="og:image" content="https://victor26sp.github.io/Projeto---up4/imagens/88115CIDRA.jpg">
+    <meta property="og:image" content="https://victor26sp.github.io/Projeto---up4/imagens/88117GOIABA.jpg">
     <meta property="og:url" content="https://victor26sp.github.io/Projeto---up4/">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="node_modules/bootstrap-icons/icons" rel="stylesheet">
+
 </head>
 
 <body>
@@ -109,6 +111,46 @@
                         <option value="">Todas as Categorias</option>
                     </select>
                 </div>
+
+                <!-- Email -->
+                <div class="container">
+                    <form id="emailForm">
+                         <!-- ... Seus campos de entrada de e-mail e botão de envio ... -->
+                         
+                        <div id="successMessage" style="display: none; color: green;">E-mail enviado com sucesso!</div>
+                        <div id="errorMessage" style="display: none; color: red;">Erro ao enviar o e-mail.</div>
+
+                        <div class="mb-3">
+                            <label for="senderEmail" class="form-label">Seu E-mail do Gmail:</label>
+                            <input type="email" class="form-control" id="senderEmail" name="senderEmail" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="senderPassword" class="form-label">Senha do Gmail:</label>
+                            <input type="password" class="form-control" id="senderPassword" name="senderPassword" required>
+                        </div>
+                                       
+                        <div class="mb-3">
+                            <label for="recipientList" class="form-label">Lista de Destinatários (separados por vírgula):</label>
+                            <input type="text" class="form-control" id="recipientList" name="recipientList" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="emailSubject" class="form-label">Assunto do E-mail:</label>
+                            <input type="text" class="form-control" id="emailSubject" name="emailSubject" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="emailBody" class="form-label">Corpo do E-mail:</label>
+                            <textarea class="form-control" id="emailBody" name="emailBody" rows="4" required></textarea>
+                        </div>
+                    
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-envelope"></i> Enviar E-mail</button>
+                    </form>
+                    
+                </div>
+
+
             </ul>
         </div>
     </div>
@@ -128,6 +170,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="email.js"></script>
     <script src="whats.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
