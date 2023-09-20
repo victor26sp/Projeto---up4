@@ -94,12 +94,24 @@ function createSizeGrid(product) {
 function renderCatalog(products) {
     catalogDiv.innerHTML = '';
 
+    const searchInput = document.getElementById('searchInput').value.trim().toLowerCase(); // Obtenha o valor da barra de pesquisa e converta para minúsculas
+
     const filteredProducts = products.filter(product => {
         if (favoriteFilter && !product.isFavorite) {
             return false;
         }
         if (categoryFilter && product.category !== categoryFilter) {
             return false;
+        }
+        if (searchInput) {
+            // Verifique se algum dos campos (ref, descrição ou grupo) contém o texto de pesquisa
+            if (
+                !product.ref.toLowerCase().includes(searchInput) &&
+                !product.description.toLowerCase().includes(searchInput) &&
+                !product.group.toLowerCase().includes(searchInput)
+            ) {
+                return false; // Não corresponde à pesquisa
+            }
         }
         return true;
     });
